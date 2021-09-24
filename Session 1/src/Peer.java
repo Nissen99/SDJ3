@@ -1,5 +1,3 @@
-package Peer;
-
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.Remote;

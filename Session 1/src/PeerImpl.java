@@ -1,5 +1,3 @@
-package Peer;
-
 import java.io.Serializable;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
@@ -66,7 +64,7 @@ public class PeerImpl implements Peer, Serializable
 
   }
 
-  @Override public String getName()
+  public String getName()
   {
     return name;
   }
