@@ -1,21 +1,16 @@
 package businessServer.model;
 
 import shared.Person;
+import shared.PropertyChangeSubject;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 
 public class ServerModel implements IServerModel {
 
+    private PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    @Override
-    public ArrayList<Person> getAllPersons() {
-        return null;
-    }
-
-    @Override
-    public Person getPerson(int accountNumber) {
-        return null;
-    }
 
     @Override
     public Person login(String username, String password) {
@@ -29,9 +24,40 @@ public class ServerModel implements IServerModel {
 
 
     @Override
-    public int deposit(int accountNumber, int amount) {
-        return 0;
+    public void deposit(Person person, int amount) {
+    person.setBalance(person.getBalance() + amount);
     }
 
+    @Override
+    public void withdraw(Person person, int amount) {
+        person.setBalance(person.getBalance() - amount);
 
+    }
+
+    @Override
+    public int checkBalance(Person subject) {
+        return subject.getBalance();
+    }
+
+    @Override
+    public void sendMoney(Person sender, int amount, Person receiver) {
+        withdraw(sender, amount);
+        deposit(receiver, amount);
+
+    }
+
+    @Override
+    public void done(){
+        support.firePropertyChange("moneySend", 1, 2);
+    }
+
+    @Override
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
+
+    @Override
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+    support.removePropertyChangeListener(listener);
+    }
 }

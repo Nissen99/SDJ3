@@ -2,22 +2,37 @@ package client.view.viewModel;
 
 import client.core.ModelFactory;
 import client.model.IClientModel;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class ViewModelBank {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class ViewModelBank implements PropertyChangeListener {
 
     private IClientModel clientModel = ModelFactory.getInstance().getModel();
 
     private StringProperty username = new SimpleStringProperty();
+    private StringProperty accountNumber = new SimpleStringProperty();
     private StringProperty balance = new SimpleStringProperty();
     private StringProperty withdrawAmount = new SimpleStringProperty();
     private StringProperty depositAmount = new SimpleStringProperty();
     private StringProperty receiverNumber = new SimpleStringProperty();
 
 
+    public String getAccountNumber() {
+        return accountNumber.get();
+    }
+
+    public StringProperty accountNumberProperty() {
+        return accountNumber;
+    }
+
     public ViewModelBank(){
+        clientModel.addPropertyChangeListener(this::propertyChange);
         username.setValue(clientModel.getLoggedIn().getUsername());
+        accountNumber.setValue(String.valueOf(clientModel.getLoggedIn().getAccountNumber()));
         checkBalance();
     }
 
@@ -95,4 +110,11 @@ public class ViewModelBank {
     private StringProperty receiverAmount = new SimpleStringProperty();
 
 
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+
+        Platform.runLater(() -> checkBalance());
+        System.out.println("PropertyChange VM");
+
+    }
 }

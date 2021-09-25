@@ -29,14 +29,15 @@ public class DatabaseServer implements IDatabaseServer {
         System.out.println("DatabaseServer Started....");
     }
 
+
     @Override
-    public ArrayList<Person> getAllPersons() {
-        return null;
+    public void updatePerson(Person person) throws RemoteException {
+        model.updatePerson(person);
     }
 
     @Override
     public Person getPerson(int accountNumber) {
-        return null;
+        return model.getPerson(accountNumber);
     }
 
     @Override
@@ -49,18 +50,4 @@ public class DatabaseServer implements IDatabaseServer {
         return model.registerUser(username, password);
     }
 
-    @Override
-    public void withdraw(int accountNumber, int amount) {
-         model.withdraw(accountNumber, amount);
-    }
-
-    @Override
-    public void deposit(int accountNumber, int amount) {
-         model.deposit(accountNumber, amount);
-    }
-
-    @Override
-    public int checkBalance(int accountNumber) {
-        return model.checkBalance(accountNumber);
-    }
 }

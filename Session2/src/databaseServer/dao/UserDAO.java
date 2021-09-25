@@ -24,6 +24,7 @@ public class UserDAO extends BaseDAO implements IUserDAO{
             if (resultSet.next()){
                 user = new Person(resultSet.getInt("balance"),
                         resultSet.getString("username"),
+                        resultSet.getString("password"),
                         resultSet.getInt("accountNumber"));
                 return user;
             }

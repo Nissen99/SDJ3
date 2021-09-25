@@ -1,7 +1,10 @@
 package databaseServer.dao;
 
+import shared.Person;
+
 public interface IPersonDAO {
 
-    int checkBalance(int accountNumber);
+    Person getPerson(int accountNumber);
+    void updatePerson(Person person);
 
 }

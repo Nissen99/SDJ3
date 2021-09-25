@@ -10,22 +10,13 @@ import java.util.ArrayList;
 public class DatabaseServerModel implements IDatabaseServerModel {
 
     IUserDAO userDAO = new UserDAO();
-    IMoneyDAO moneyDAO = new MoneyDAO();
     IPersonDAO personDAO = new PersonDAO();
 
-    @Override
-    public void startServer() throws RemoteException, AlreadyBoundException {
 
-    }
-
-    @Override
-    public ArrayList<Person> getAllPersons() {
-        return null;
-    }
 
     @Override
     public Person getPerson(int accountNumber) {
-        return null;
+        return personDAO.getPerson(accountNumber);
     }
 
     @Override
@@ -39,17 +30,9 @@ public class DatabaseServerModel implements IDatabaseServerModel {
     }
 
     @Override
-    public void withdraw(int accountNumber, int amount) {
-        moneyDAO.withdraw(accountNumber, amount);
+    public void updatePerson(Person person) {
+        personDAO.updatePerson(person);
     }
 
-    @Override
-    public void deposit(int accountNumber, int amount) {
-        moneyDAO.deposit(accountNumber, amount);
-    }
 
-    @Override
-    public int checkBalance(int accountNumber) {
-        return personDAO.checkBalance(accountNumber);
-    }
 }

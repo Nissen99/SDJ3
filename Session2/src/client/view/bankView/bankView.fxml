@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.bankView.BankController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="client.view.bankView.BankController">
    <children>
       <Label layoutX="49.0" layoutY="49.0" text="Username:">
          <font>
@@ -38,5 +38,15 @@
       <Label layoutX="383.0" layoutY="241.0" text="Receiver" />
       <Label layoutX="384.0" layoutY="291.0" text="Amount" />
       <Button layoutX="471.0" layoutY="330.0" mnemonicParsing="false" onAction="#sendMoney" text="Send Money" />
+      <Label layoutX="275.0" layoutY="32.0" text="AccountNumber:">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="accountNumberLabel" layoutX="471.0" layoutY="32.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

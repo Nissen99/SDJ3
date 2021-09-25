@@ -1,17 +1,19 @@
 package client.network;
 
 import shared.Person;
+import shared.PropertyChangeSubject;
 
-public interface IClient {
+public interface IClient extends PropertyChangeSubject {
 
     void startClient();
 
-    void deposit(int accountNumber, int amount) ;
-    void withdraw(int accountNumber, int amount) ;
+    void deposit( int amount) ;
+    void withdraw(int amount) ;
     Person login(String username, String password) ;
-    void sendMoney(int accountNumberSender, int amount, int accountNumberReceiver);
-    int checkBalance(int accountNumber) ;
+    void sendMoney(int amount, int accountNumberReceiver);
+    int checkBalance() ;
 
     boolean registerUser(String username, String password);
 
+    Person getLoggedIn();
 }

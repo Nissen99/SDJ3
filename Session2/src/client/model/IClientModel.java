@@ -1,8 +1,9 @@
 package client.model;
 
 import shared.Person;
+import shared.PropertyChangeSubject;
 
-public interface IClientModel {
+public interface IClientModel extends PropertyChangeSubject {
 
         void deposit(int amount);
         void withdraw(int amount);
@@ -11,8 +12,8 @@ public interface IClientModel {
         int checkBalance();
 
     void registeruser(String username, String password);
-    Person getLoggedIn();
 
+        Person getLoggedIn();
 }
 
 
