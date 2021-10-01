@@ -14,7 +14,6 @@ public class Client {
 
         PrintWriter out = new PrintWriter(socket.getOutputStream());
         BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        InputStream inS = socket.getInputStream();
         Scanner scanner = new Scanner(System.in);
 
 
@@ -38,14 +37,12 @@ public class Client {
 
 
             response = in.readLine();
-                System.out.println("READ LINE FROM C#");
-
+            System.out.println("READ LINE FROM C#");
 
 
             System.out.println(response);
             Car careResponse = gson.fromJson(response, Car.class);
             System.out.println(gson.toJson(careResponse));
-
 
 
     }

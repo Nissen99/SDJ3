@@ -1,6 +1,3 @@
-import com.google.gson.GsonBuilder;
-import netscape.javascript.JSObject;
-import com.google.gson.Gson;
 
 import java.io.IOException;
 
