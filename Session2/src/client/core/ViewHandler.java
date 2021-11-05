@@ -44,6 +44,7 @@ public class ViewHandler {
     {
         setStage(stage);
         setState(new LoginController());
+        System.out.println(getClass().getResource("../view/" + state.getPath() + "View.fxml"));
         openView();
         //openView("Login");
     }
