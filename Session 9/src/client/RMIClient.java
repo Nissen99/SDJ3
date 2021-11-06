@@ -10,11 +10,12 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class RMIClient implements ICallBackClient, IRMIClient {
 
-    private String typePreference;
+    private ArrayList<String> typePreferences = new ArrayList<>();
     private IRMIServer server;
 
     @Override
@@ -24,10 +25,19 @@ public class RMIClient implements ICallBackClient, IRMIClient {
 
             Registry registry = LocateRegistry.getRegistry("localhost", 1099);
             server = (IRMIServer) registry.lookup("Server");
-            System.out.println("What type you want");
             Scanner scanner = new Scanner(System.in);
-            typePreference = scanner.nextLine();
-            server.addCallback(this, typePreference);
+
+            while (true) {
+                System.out.println("What type you want || \"Quit\" to not add more");
+                String preference = scanner.nextLine();
+                if ("Quit".equals(preference)){
+                    break;
+                }
+                typePreferences.add(preference);
+                System.out.println(typePreferences.size());
+            }
+
+            server.addCallback(this, typePreferences);
             System.out.println("Client Started....");
 
             while (true){
@@ -69,25 +79,19 @@ public class RMIClient implements ICallBackClient, IRMIClient {
 
     @Override
     public void update(TransferObject transferObject) throws RemoteException {
+        System.out.println("UPDATEEEEE");
+        if (typePreferences.contains(transferObject.getType())) {
 
-        if ("FootballScore".equals(typePreference)) {
-            FootballScore footballScore = (FootballScore) transferObject.getContents();
-            System.out.println(footballScore.toString());
+            if (transferObject.getType().equals("FootballScore")) {
+                FootballScore footballScore = (FootballScore) transferObject.getContents();
+                System.out.println(footballScore.toString());
 
-        } else if ("Stock".equals(typePreference)) {
-            Stock stock = (Stock) transferObject.getContents();
-            System.out.println(stock.toString());
+            } else if (transferObject.getType().equals("Stock")) {
+                Stock stock = (Stock) transferObject.getContents();
+                System.out.println(stock.toString());
 
-        } else if (transferObject.getContents() instanceof FootballScore) {
-            FootballScore footballScore = (FootballScore) transferObject.getContents();
-            System.out.println(footballScore.toString());
-
-        } else {
-            Stock stock = (Stock) transferObject.getContents();
-            System.out.println(stock.toString());
-
+            }
         }
     }
-
 }
 

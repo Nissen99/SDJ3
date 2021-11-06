@@ -8,11 +8,12 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class RMIServer implements IRMIServer {
 
-    private HashMap<ICallBackClient, String> callBackClients = new HashMap<>();
+    private HashMap<ICallBackClient, ArrayList<String>> callBackClients = new HashMap<>();
 
     public RMIServer() throws RemoteException {
         UnicastRemoteObject.exportObject(this, 0);
@@ -32,7 +33,7 @@ public class RMIServer implements IRMIServer {
 
 
     @Override
-    public void addCallback(ICallBackClient callBackClient, String wantUpdateType) throws RemoteException {
+    public void addCallback(ICallBackClient callBackClient, ArrayList<String> wantUpdateType) throws RemoteException {
 
         callBackClients.put(callBackClient, wantUpdateType);
         System.out.println("Client added with: " + wantUpdateType);
@@ -43,11 +44,9 @@ public class RMIServer implements IRMIServer {
 
         for (ICallBackClient callback : callBackClients.keySet()) {
             try {
-                String type = callBackClients.get(callback);
+                ArrayList<String> types = callBackClients.get(callback);
 
-                if ("both".equals(type)) {
-                    callback.update(transferObject);
-                } else if (type.equals(transferObject.getType())) {
+                if (types.contains(transferObject.getType())) {
                     callback.update(transferObject);
                 }
             } catch (Exception e){
