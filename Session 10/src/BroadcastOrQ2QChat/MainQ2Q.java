@@ -1,13 +1,13 @@
-package PersonToPersonChat;
+package BroadcastOrQ2QChat;
 
-public class Main {
+public class MainQ2Q {
     public static void main(String[] args) throws Exception {
 
         Recv recv = new Recv();
         Send send = new Send();
 
-        recv.listenToMsg();
-
+        recv.listenToBroadcastMsg();
+        recv.listenToPersonalMsg();
         while (true){
             send.writeMsg();
         }

@@ -9,14 +9,11 @@ public class Recv {
 
 
 
-    private String QUEUE_NAME;
 
     private static final String EXCHANGE_NAME = "logs";
 
     public void listenToMsg() throws Exception {
-        Scanner scanner = new Scanner(System.in);
-       // System.out.println("What Q name you want?");
-      //  QUEUE_NAME = scanner.nextLine();
+
 
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
@@ -33,7 +30,7 @@ public class Recv {
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
-            System.out.println(" [x] Received '" + message + "'" + " in Q: " + QUEUE_NAME);
+            System.out.println(" [x] Received '" + message + "'");
         };
         channel.basicConsume(queueName, true, deliverCallback, consumerTag -> { });
     }
