@@ -1,0 +1,14 @@
+DROP SCHEMA IF EXISTS "smallbank" CASCADE;
+CREATE SCHEMA smallbank;
+SET SCHEMA 'smallbank';
+
+
+
+CREATE TABLE if NOT EXISTS person(
+    username    VARCHAR UNIQUE ,
+    password    VARCHAR,
+    balance     INT,
+    accountNumber   SERIAL PRIMARY KEY
+);
+
+

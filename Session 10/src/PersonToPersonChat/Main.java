@@ -1,3 +1,5 @@
+package PersonToPersonChat;
+
 public class Main {
     public static void main(String[] args) throws Exception {
 
@@ -5,6 +7,7 @@ public class Main {
         Send send = new Send();
 
         recv.listenToMsg();
+
         while (true){
             send.writeMsg();
         }
